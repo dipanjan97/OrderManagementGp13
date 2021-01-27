@@ -27,6 +27,9 @@ select * from dual;
 
 
 
+
+
+
 create table product(
 productID varchar2(6) primary key,
 stockID references stock(stockID),
@@ -53,28 +56,54 @@ select * from dual;
 
 
 
+
+
+
 create table placedOrder(
-OrderID varchar2(6),
+OrderID varchar2(6) primary key,
 OrderDate date,
-status varchar2(10),
-productID references product(productID),
-qauntity number(5),
-primary key(OrderID,ProductID)
+status varchar2(10)
 );
 
 
 
 insert all
-into placedOrder values('OD11','02-Jan-21','Shipped','P011',25)
-into placedOrder values('OD11','02-Jan-21','Delivered','P012',50)
-into placedOrder values('OD11','02-Jan-21','Shipped','P014',50)
-into placedOrder values('OD12','17-Jan-21','Ordered','P011',65)
-into placedOrder values('OD12','22-Jan-21','Ordered','P017',100)
-into placedOrder values('OD13','22-Jan-21','Ordered','P013',45)
-into placedOrder values('OD14','14-Jan-21','Delivered','P018',25)
-into placedOrder values('OD14','15-Jan-21','Shipped','P021',25)
-into placedOrder values('OD15','02-Jan-21','Shipped','P019',20)
+into placedOrder values('OD11','02-Jan-21','Shipped')
+into placedOrder values('OD12','17-Jan-21','Ordered')
+into placedOrder values('OD13','22-Jan-21','Ordered')
+into placedOrder values('OD14','14-Jan-21','Delivered')
+into placedOrder values('OD15','02-Jan-21','Shipped')
 select * from dual;
+
+
+
+
+
+
+create table OrderProdDetails(
+orderID references placedOrder(orderID),
+productID references product(productID),
+qauntity number(5),
+primary key(orderID,productID)
+);
+
+
+insert all
+into OrderProdDetails values('OD11','P011',25)
+into OrderProdDetails values('OD11','P012',50)
+into OrderProdDetails values('OD11','P014',50)
+into OrderProdDetails values('OD12','P011',65)
+into OrderProdDetails values('OD12','P017',100)
+into OrderProdDetails values('OD13','P013',45)
+into OrderProdDetails values('OD14','P018',25)
+into OrderProdDetails values('OD14','P021',25)
+into OrderProdDetails values('OD15','P019',20)
+select * from dual;
+
+
+
+
+
 
 
 
@@ -83,22 +112,17 @@ custID varchar2(5),
 custName varchar2(20),
 custEmail varchar2(30),
 custAddress varchar2(50),
-orderID varchar2(6),
-productID varchar2(6),
-constraint Fk_B_01 foreign key (orderID,ProductID) references placedOrder(orderID,ProductID)
+orderID references placedOrder(orderID)
 );
+
 
  
 insert all
-into customer values('C01','Michael Scott','scott.michael@gmail.com','260 Charter Street Mission, KS 66202','OD11','P011')
-into customer values('C01','Michael Scott','scott.michael@gmail.com','260 Charter Street Mission, KS 66202','OD11','P012')
-into customer values('C01','Michael Scott','scott.michael@gmail.com','260 Charter Street Mission ,  KS 66202','OD11','P014')
-into customer values('C02','Jeffrey T. Williams','jtwilliams@gmail.com','160 Jones AvenueGreensboro, KS 66202','OD12','P011')
-into customer values('C02','Jeffrey T. Williams','jtwilliams@gmail.com','160 Jones AvenueGreensboro, KS 66202','OD12','P017')
-into customer values('C03','Judith Lewis','lewisj@gmail.com','1164 Brooklyn Street Eugene, OR 97402','OD13','P013')
-into customer values('C04','Robin Williams','rwilliams@rediffmail.com','4659 Bridge Avenue Lafayette, LA 70503','OD14','P018')
-into customer values('C04','Robin Williams','rwilliams@rediffmail.com','4659 Bridge Avenue Lafayette, LA 70503','OD14','P021')
-into customer values('C05','Martha Eastwood','meastwood@yahoo.com','4276 Karen Lane Eminence, KY 40019','OD15','P019')
+into customer values('C01','Michael Scott','scott.michael@gmail.com','260 Charter Street Mission, KS 66202','OD11')
+into customer values('C02','Jeffrey T. Williams','jtwilliams@gmail.com','160 Jones AvenueGreensboro, KS 66202','OD12')
+into customer values('C03','Judith Lewis','lewisj@gmail.com','1164 Brooklyn Street Eugene, OR 97402','OD13')
+into customer values('C04','Robin Williams','rwilliams@rediffmail.com','4659 Bridge Avenue Lafayette, LA 70503','OD14')
+into customer values('C05','Martha Eastwood','meastwood@yahoo.com','4276 Karen Lane Eminence, KY 40019','OD15')
 select * from dual;
 
 
