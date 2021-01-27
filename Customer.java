@@ -1,18 +1,48 @@
 package com.psl.project.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Customer {
 	private int custID;
 	private String custName;
 	private String custEmail;
-	private String custAddress;
-	
-	Order[] order = new Order[10];
+	private String custAddress;	
+	private ArrayList<PlacedOrder> placedOrder; 
+	private ArrayList<Product> product;
 	
 	public Customer() {
 		
 	}
+	
+	public Customer(int custID, String custName, String custEmail, String custAddress,
+		ArrayList<PlacedOrder> placedOrder, ArrayList<Product> product) {
+		super();
+		this.custID = custID;
+		this.custName = custName;
+		this.custEmail = custEmail;
+		this.custAddress = custAddress;
+		this.placedOrder = placedOrder;
+		this.product = product;
+	}
+
+
+
+	/**
+	 * @return the product
+	 */
+	public ArrayList<Product> getProduct() {
+		return product;
+	}
+
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(ArrayList<Product> product) {
+		this.product = product;
+	}
+
+
 
 	/**
 	 * @return the custID
@@ -69,29 +99,31 @@ public class Customer {
 	public void setCustAddress(String custAddress) {
 		this.custAddress = custAddress;
 	}
+	
+	
 
 	/**
-	 * @return the order
+	 * @return the placedOrder
 	 */
-	public Order[] getOrder() {
-		return order;
+	public ArrayList<PlacedOrder> getPlacedOrder() {
+		return placedOrder;
 	}
 
 	/**
-	 * @param order the order to set
+	 * @param placedOrder the placedOrder to set
 	 */
-	public void setOrder(Order[] order) {
-		this.order = order;
-	}
-
+	public void setPlacedOrder(ArrayList<PlacedOrder> placedOrder) {
+		this.placedOrder = placedOrder;
+	}	
+	
 	@Override
 	public String toString() {
 		return "Customer [custID=" + custID + ", " + (custName != null ? "custName=" + custName + ", " : "")
 				+ (custEmail != null ? "custEmail=" + custEmail + ", " : "")
 				+ (custAddress != null ? "custAddress=" + custAddress + ", " : "")
-				+ (order != null ? "order=" + Arrays.toString(order) : "") + "]";
+				+ (placedOrder != null ? "placedOrder=" + placedOrder : "") + "]";
 	}
-	
+
 	public boolean validate() {
 		String regexName = "^[a-zA-Z]+$";
 		String regexEmail = "^[a-zA-Z0-9-._]+@[a-zA-Z0-9.-]+$";
