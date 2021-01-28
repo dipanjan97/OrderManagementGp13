@@ -6,7 +6,7 @@ public class Order {
 	private int orderID;
 	private OrderItems[] orderItems;
 	private String orderDate;
-	private String[] status = {"Shipped","Ordered","Delivered"};
+	private String status;
 	
 	public Order() {
 		
@@ -57,14 +57,14 @@ public class Order {
 	/**
 	 * @return the status
 	 */
-	public String[] getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 	/**
 	 * @param status the status to set
 	 */
-	public void setStatus(String[] status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -73,7 +73,7 @@ public class Order {
 		return "Order [orderID=" + orderID + ", "
 				+ (orderItems != null ? "orderItems=" + Arrays.toString(orderItems) + ", " : "")
 				+ (orderDate != null ? "orderDate=" + orderDate + ", " : "")
-				+ (status != null ? "status=" + Arrays.toString(status) : "") + "]";
+				+ (status != null ? "status=" + status : "") + "]";
 	}
 	
 	
