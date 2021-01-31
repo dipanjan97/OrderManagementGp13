@@ -6,8 +6,8 @@ import java.io.IOException;
 
 public class GenerateBill {
 	
-	public static String createBill(String customerName,int billNo, Order orders) throws IOException {
-		String res = customerName+"Bill"+billNo;
+public static String createBill(String customerName, Order orders) throws IOException {
+		String res = customerName+"Bill"+orders.getOrderDate();
 		String write = "";
 		double total = 0;
 		write += "Name : "+customerName;
@@ -27,9 +27,10 @@ public class GenerateBill {
 		}
 		write += String.format("%"+60+"s","Grand Total : "+total+"0");
 //		System.out.println(write);
-		File newFile = new File("C:\\gitproject\\"+res+billNo+".txt");
+		File newFile = new File("C:\\gitproject\\"+res+orders.getOrderDate()+".txt");
 		newFile.createNewFile() ;
-		try (FileWriter out = new FileWriter(newFile);) {
+		try (
+				FileWriter out = new FileWriter(newFile);) {
 			
 			out.write(write);
 			
@@ -37,6 +38,5 @@ public class GenerateBill {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return res+" created successfully.";
+		return res+" created.";
 	}
-}
